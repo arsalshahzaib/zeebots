@@ -1,25 +1,29 @@
-import logo from './logo.svg';
-import './App.css';
-
-function App() {
+import { BrowserRouter, Routes, Route } from "react-router-dom";
+import { Home, Login, Register, Robots, Insert, Reports } from "./pages";
+import { AdminHome, AdminReports, AdminRobots, AdminInsert } from "./admin/pages";
+import { Layout } from "./layout/Layout";
+import { AdminLayout } from "./layout/AdminLayout";
+export default function App() {
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
+    <>
+      <BrowserRouter>
+        <Routes>
+          <Route path="/login" element={<Login />} />
+          <Route path="/Register" element={<Register />} />
+          <Route path="/" element={<Layout />}>
+            <Route index element={<Home />} />
+            <Route path="/robots" element={<Robots />} />
+            <Route path="/insert" element={<Insert />} />
+            <Route path="/reports" element={<Reports />} />
+          </Route>
+          <Route path="/admin" element={<AdminLayout />}>
+            <Route index element={<AdminHome />} />
+            <Route path="/admin/robots" element={<AdminRobots />} />
+            <Route path="/admin/insert" element={<AdminInsert />} />
+            <Route path="/admin/reports" element={<AdminReports />} />
+          </Route>
+        </Routes>
+      </BrowserRouter>
+    </>
   );
 }
-
-export default App;
